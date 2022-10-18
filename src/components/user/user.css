@@ -1,0 +1,25 @@
+.user_box{
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  background: #ccc;
+  padding: 10px 10px 20px 10px;
+}
+
+.user_box > img {
+  width: 100%;
+}
+
+.user_box > h2{
+  font-size: 30px;
+  font-weight: 500;
+  color: #252525;
+}
+
+.user_box > p{
+  font-size: 20px;
+  color: #252525;
+}

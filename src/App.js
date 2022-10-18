@@ -1,23 +1,46 @@
-import logo from './logo.svg';
+import { useEffect,useState } from 'react';
+import User from './components/user/user';
 import './App.css';
+import Header from './components/Header/Header';
 
 function App() {
+
+const [users, setUsers] = useState([]);
+const [text, setText] = useState("");
+const [staticUsers, setStaticUsers] = useState([]) 
+
+useEffect(()=>{
+  fetch("https://api.github.com/users")
+    .then((resolve) => resolve.json())
+    .then((data) => {
+      setUsers(data)
+      setStaticUsers(data)
+    })
+.catch((err) => console.log(err));
+},[]);
+
+useEffect(() =>{
+ if(text.length >= 2){
+  setUsers(staticUsers.filter((user) => user.login.includes(text)))
+ }else{
+  setUsers(staticUsers)
+ }
+},[text])
+
+const deleteUser = (item) => {
+  setUsers (users.filter((user) => user.id !== item.id))
+}
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header text={text} setText={setText}/>
+      <div className='display_users'>      
+      {
+        users.map((user) => {
+          return <User key={user.id} user={user} deleteUser={deleteUser}/> 
+        })
+      }
+      </div>
     </div>
   );
 }

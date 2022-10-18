@@ -1,0 +1,17 @@
+.header{
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input{
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  box-shadow: 5px 5px 15px 15px darkgray;
+  border: none;
+}
